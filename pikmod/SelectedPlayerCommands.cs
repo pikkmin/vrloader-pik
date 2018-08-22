@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using VRC;
 using VRC.Core;
+using Photon;
 
 namespace PikMod
 {
@@ -33,8 +34,10 @@ namespace PikMod
 			this.selectedUser = (APIUser)this.selectedUserField.GetValue(this.menu);
 			if (this.selectedUser != null)
 			{
-				this.selectedPlayer = PlayerManager.GetPlayer(this.selectedUser.id).vrcPlayer;
-				return true;
+
+                //this.selectedPlayer = PlayerManager.GetPlayer(this.selectedUser.id).vrcPlayer;
+                this.selectedPlayer = PlayerManager.GetPlayer(this.selectedUser.id);
+                return true;
 			}
 			return false;
 		}
@@ -43,20 +46,35 @@ namespace PikMod
 		[Command(KeyCode.Mouse1, false)]
 		public void CopyAvatar()
 		{
+
             //.WriteLine(this.selectedUser);
             //Console.WriteLine(this.selectedUser.displayName);
-            Console.WriteLine(this.selectedUser.currentAvatarBlueprint);
-            Console.WriteLine(this.selectedUser.currentAvatarBlueprint.Values);
-            //AvatarUtils.CopyAvatar1(this.selectedPlayer);
-            //Console.WriteLine("Copied {0}'s avatar!", this.selectedUser.displayName);
+            // Console.WriteLine(this.selectedUser.currentAvatarBlueprint);
+            // Console.WriteLine(this.selectedUser.currentAsvatarBlueprint.Values);
+            if (this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC.ContainsKey("avatarBlueprint") && this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC["avatarBlueprint"] != null)
+            {
+                var obj = selectedPlayer.INHALJIAKAB.ONEMEJCBNLC;
+                var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+                ApiAvatar apiAvatar = new ApiAvatar();
+                  
+                //apiAvatar = this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC["avatarBlueprint"];
 
+                Console.WriteLine(this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC);
+                Console.WriteLine(this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC["avatarBlueprint"]);
+                    Console.WriteLine(this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC["avatarBlueprint"].ToString());
+                var pout = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(jsonString);
+                Console.WriteLine(pout);
+                //AvatarUtils.SaveAvatar(success.Model as ApiAvatar, this.selectedPlayer.INHALJIAKAB.ONEMEJCBNLC["avatarBlueprint"].ToString(), "");
+
+                //Console.WriteLine("Copied {0}'s avatar!", this.selectedUser.displayName);
+            }
         }
 
         // Token: 0x06000050 RID: 80 RVA: 0x000038AC File Offset: 0x00001AAC
         [Command(KeyCode.Mouse2, false)]
 		public void SaveAvatar()
 		{
-			AvatarUtils.SaveAvatar(this.selectedPlayer, ConsoleUtils.AskInput("Enter avatar's name: "), "");
+			//AvatarUtils.SaveAvatar(this.selectedPlayer, ConsoleUtils.AskInput("Enter avatar's name: "), "");
 		}
 
        /* [Command(KeyCode.Mouse2, false)]
@@ -99,7 +117,7 @@ namespace PikMod
 		private APIUser selectedUser;
 
 		// Token: 0x0400003E RID: 62
-		private VRCPlayer selectedPlayer;
+		private VRC.Player selectedPlayer;
 
 		// Token: 0x0200001F RID: 31
 	
