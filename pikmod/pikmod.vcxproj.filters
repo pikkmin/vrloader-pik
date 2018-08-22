@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="AvatarUtils.cs" />
+    <None Include="Command.cs" />
+    <None Include="CommandAttribute.cs" />
+    <None Include="CommandHandler.cs" />
+    <None Include="CommandsBase.cs" />
+    <None Include="ConsoleUtils.cs" />
+    <None Include="GlobalCommands.cs" />
+    <None Include="ILInstruction.cs" />
+    <None Include="ILParser.cs" />
+    <None Include="MiscUtils.cs" />
+    <None Include="PikMod.cs" />
+    <None Include="PikUIMods.cs" />
+    <None Include="PlayerUtils.cs" />
+    <None Include="SavedAvatarList.cs" />
+    <None Include="SelectedPlayerCommands.cs" />
+    <None Include="ExampleModule.csproj" />
+  </ItemGroup>
+</Project>
